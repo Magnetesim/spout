@@ -31,3 +31,5 @@ kuni, which aims to add useful features and simplify the code.
 From me:
 
 Then, I changed some types in the code to work on 64 bit systems. The original code comes from [here](https://njw.name/spout/https://njw.name/spout/ "Nick White's Website").
+
+To compile this, you need SDL 1.2. On Arch, you can get this from installing the sdl12-compat package from pacman (I think, you may need to also install the more modern SDL packages as well).
