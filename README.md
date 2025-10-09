@@ -1,2 +1,33 @@
-# spout
-a re uploaded &amp; fixed version of the game spout written by kuni
+Spout
+=====
+
+Spout is a simple caveflying game. The aim is to get as high as
+possible, avoiding or destroying obstacles.
+
+Controls
+--------
+
+Left:      Rotate left  
+Right:     Rotate right  
+Space:     Thrust  
+Esc:       Pause  
+Shift-Esc: Quit
+
+History
+-------
+
+From Nick White:
+
+Spout was originally written for a handheld by kuni, and soon
+afterwards was ported to Windows using cygwin and sdl and released
+under the MIT license.
+
+In 2004 a 'unix version' was released, which mostly just slapped
+autotools into the windows version and infringed the license.
+
+This is a new unix version, based on the original Windows code by
+kuni, which aims to add useful features and simplify the code.
+
+From me:
+
+Then, I changed some types in the code to work on 64 bit systems. The original code comes from [here](https://njw.name/spout/https://njw.name/spout/ "Nick White's Website").
