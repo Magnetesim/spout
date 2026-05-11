@@ -15,7 +15,10 @@
 #include "font.h"
 
 #define FRAMERATE 50
-#define MAX_GRAIN 500
+#define MAX_GRAIN 500 // 500 is default
+#define MAX_SPEED 256 // max speed, default is 256
+#define SPEED_FACTOR 128 // less is faster, keep to powers of 2, default is 128
+#define GRAIN_FACTOR 1 // default is 1. scales how much grain comes out
 
 const unsigned char	MATSUMI[] = {
 //	 80,  77,  66,  80, 180,   0,   0,   0,   1,   0, 128,   0,  10,   0, 223, 119,
@@ -237,20 +240,20 @@ void pceAppProc(int cnt)
 				mR = (mR + 16) & 1023;
 			}
 			if((pad & (PAD_A | PAD_B))) {
-				mSpeed.x -= sintable[(256 + mR) & 1023] / 128;
-				mSpeed.y += sintable[mR] / 128;
+				mSpeed.x -= sintable[(256 + mR) & 1023] / SPEED_FACTOR;
+				mSpeed.y += sintable[mR] / SPEED_FACTOR;
 			}
 			mSpeed.y += 8;
 
-			if(mSpeed.x < -256 * 4) {
-				mSpeed.x = -256 * 4;
-			} else if(mSpeed.x > 256 * 4) {
-				mSpeed.x = 256 * 4;
+			if(mSpeed.x < -MAX_SPEED * 4) {
+				mSpeed.x = -MAX_SPEED * 4;
+			} else if(mSpeed.x > MAX_SPEED * 4) {
+				mSpeed.x = MAX_SPEED * 4;
 			}
-			if(mSpeed.y < -256 * 4) {
-				mSpeed.y = -256 * 4;
-			} else if(mSpeed.y > 256 * 4) {
-				mSpeed.y = 256 * 4;
+			if(mSpeed.y < -MAX_SPEED * 4) {
+				mSpeed.y = -MAX_SPEED * 4;
+			} else if(mSpeed.y > MAX_SPEED * 4) {
+				mSpeed.y = MAX_SPEED * 4;
 			}
 
 			mPos.x += mSpeed.x / 16;
@@ -737,19 +740,21 @@ void spout(int t, int x, int y)
 {
 	if(*(vbuff2 + t) == 0) {
 		if(nGrain < MAX_GRAIN) {
-			GRAIN *pG = allocGrain();
+			for(unsigned int i = 0; i < GRAIN_FACTOR; i++) {
+				GRAIN *pG = allocGrain();
+				// printf("nGrain: %d\n", nGrain);
+				pG->v.x = x;
+				pG->v.y = y;
+				pG->s.x = 0;
+				pG->s.y = 0;
 
-			pG->v.x = x;
-			pG->v.y = y;
-			pG->s.x = 0;
-			pG->s.y = 0;
+				pG->color = (2 + (rand() & 1)) + 4 + 64 * 3;
 
-			pG->color = (2 + (rand() & 1)) + 4 + 64 * 3;
-
-			pG->pos = t;
-			*(vbuff2 + t) = pG->color;
-			v2g[t] = pG;
-			nGrain ++;
+				pG->pos = t;
+				*(vbuff2 + t) = pG->color;
+				v2g[t] = pG;
+				nGrain ++;
+			}
 		}
 	}
 }
