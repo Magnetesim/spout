@@ -32,4 +32,20 @@ From me:
 
 Then, I changed some types in the code to work on 64 bit systems. The original code comes from [here](https://njw.name/spout/ "Nick White's Website").
 
-To compile this, you need SDL 1.2. On Arch, you can get this from installing the sdl12-compat package from pacman (I think, you may need to also install the more modern SDL packages as well).
+To compile this, you need SDL 1.2. On Arch, you can get the correct package by using
+```bash
+pacman -S sdl12-compat
+```
+Then, you can just run
+```bash
+make
+```
+as normal, and that should compile everything. You'll see there are some macros at the top of `spout.c`:
+```c
+#define FRAMERATE 50 // how fast the game runs
+#define MAX_GRAIN 500 // 500 is default
+#define MAX_SPEED 256 // max speed, default is 256
+#define SPEED_FACTOR 128 // less is faster, keep to powers of 2, default is 128
+#define GRAIN_FACTOR 1 // default is 1. scales how much grain comes out
+```
+Try messing with them and see how the game plays with different values.
