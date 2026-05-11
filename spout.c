@@ -14,7 +14,7 @@
 #include "sintable.h"
 #include "font.h"
 
-#define FRAMERATE 50
+#define FRAMERATE 50 // how fast the game runs
 #define MAX_GRAIN 500 // 500 is default
 #define MAX_SPEED 256 // max speed, default is 256
 #define SPEED_FACTOR 128 // less is faster, keep to powers of 2, default is 128
