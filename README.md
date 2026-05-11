@@ -28,7 +28,7 @@ autotools into the windows version and infringed the license.
 This is a new unix version, based on the original Windows code by
 kuni, which aims to add useful features and simplify the code.
 
-From me:
+**From me:**
 
 Then, I changed some types in the code to work on 64 bit systems. The original code comes from [here](https://njw.name/spout/ "Nick White's Website").
 
