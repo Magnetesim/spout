@@ -148,7 +148,7 @@ void pceAppProc(int cnt)
 				int fa;
 				hiScore[0] = score;
 				hiScore[1] = height;
-				if((fa = open(score_path, O_CREAT | O_WRONLY | O_TRUNC)) != -1) {
+				if((fa = open(score_path, O_CREAT | O_WRONLY | O_TRUNC, 0644)) != -1) {
 					write(fa, (void *) hiScore, 8);
 					close(fa);
 				}
